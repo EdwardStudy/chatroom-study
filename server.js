@@ -12,7 +12,7 @@ var errorhandler = require('errorhandler');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
-var mongo = requrie('./config/mongodb.js');
+var mongo = require('./config/mongodb.js');
 var http = require('http');
 var path = require('path');
 
@@ -26,7 +26,7 @@ io.on('connection', function(socket){
 	var db = mongo();
 	//read the last 10 messages and send it
 	var collection = db.collection('chat messages');
-	var stream = collection.find().sort({ _id: -1}).limit(10).stream();
+	var stream = collection.find().sort().limit(10).stream();
 	stream.on('data', function(chat){
 		socket.emit('chat', chat.content);
 	});
